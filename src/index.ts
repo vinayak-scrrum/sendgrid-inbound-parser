@@ -38,7 +38,18 @@ export function getFrom(data:any){
   const arrayBody = emailBody.split("--xYzZY");
   let from = arrayBody.find((t : any) => t.includes("Content-Disposition: form-data; name=\"from\""));
   from = from?.split("\"from\"")[1].trim();
-  return from;
+  const contacts: any[] = [];
+  const parts = from?.split(",");
+  for (const part of parts? parts : "") {
+    const match = part?.trim().match(/^(.+?)?\s*<(.+?)>$/);
+    if (match) {
+      const [, name, email] = match;
+      contacts.push({name: name?.trim() || null, email: email?.trim()});
+    } else {
+      contacts.push({name: null, email: part?.trim()});
+    }
+  }
+  return contacts;
 }
 
 export function getSubject(data:any){
@@ -79,7 +90,7 @@ export function getAttachmentInfo(data:any){
   const arrayBody = emailBody.split("--xYzZY");
   let attachmentInfo = arrayBody.find((t : any) => t.includes("Content-Disposition: form-data; name=\"attachment-info\""));
   attachmentInfo = attachmentInfo?.split("\"attachment-info\"")[1].trim();
-  return attachmentInfo
+  return JSON.parse(attachmentInfo);
 }
 
 export function getAttachment(data:any){
