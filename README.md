@@ -6,7 +6,7 @@
 $ npm install --save @scrrum-labs/sendgrid-inbound-parser
 ```
 
-## Usage
+## Functions
 ```js
 getBody(data){} // It will return whole body: String
 
