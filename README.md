@@ -1,4 +1,4 @@
-# npm-sendgrid-inbound-parser
+# sendgrid-inbound-parser
 
 ## Install
 
