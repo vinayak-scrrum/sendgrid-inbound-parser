@@ -112,9 +112,9 @@ export function getAttachment(data:any){
       const contentType = contentTypeMatch ? contentTypeMatch[1] : "";
       const content = attachmentDataAll?.split(`Content-Type: ${contentType}`)[1].trim();
 
-      attachment.push({ content: content, contentType: contentType });
-    }
-    
+      attachment.push({ content: content, contentType: contentType, fileName: filename });
+      
+    }    
     return attachment
   }
   else{
